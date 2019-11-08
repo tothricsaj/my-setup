@@ -1,0 +1,170 @@
+set nocompatible              " be iMproved, required
+filetype off                  " required
+
+"set the runtime path to include Vundle and initialize
+set rtp+=~/.vim/bundle/Vundle.vim
+call vundle#begin()
+" alternatively, pass a path where Vundle should install plugins
+"call vundle#begin('~/some/path/here')
+
+" let Vundle manage Vundle, required
+Plugin 'VundleVim/Vundle.vim'
+
+" The following are examples of different formats supported.
+" Keep Plugin commands between vundle#begin/end.
+" plugin on GitHub repo
+ Plugin 'tpope/vim-fugitive'
+
+" plugin from http://vim-scripts.org/vim/scripts.html
+" Plugin 'L9'
+" Git plugin not hosted on GitHub
+ Plugin 'git://git.wincent.com/command-t.git'
+" The sparkup vim script is in a subdirectory of this repo called vim.
+" Pass the path to set the runtimepath properly.
+Plugin 'rstacruz/sparkup', {'rtp': 'vim/'}
+" Install L9 and avoid a Naming conflict if you've already installed a
+" different version somewhere else.
+" Plugin 'ascenator/L9', {'name': 'newL9'}
+"
+"NerdTree
+Plugin 'scrooloose/nerdtree'
+
+"vim-javascript
+"https://vimawesome.com/plugin/vim-javascript
+Plugin 'pangloss/vim-javascript'
+
+"vim-jsx-pretty
+Plugin 'maxmellon/vim-jsx-pretty'
+
+"YCM
+Plugin 'Valloric/YouCompleteMe'
+
+"vim-airline
+Plugin 'vim-airline/vim-airline'
+Plugin 'vim-airline/vim-airline-themes'
+
+"jinja plugin
+Bundle "lepture/vim-jinja"
+
+"auto-pairs
+Plugin 'jiangmiao/auto-pairs'
+
+"emmet.vim
+Plugin 'mattn/emmet-vim'
+
+"vim-indent-guides
+Plugin 'nathanaelkane/vim-indent-guides'
+
+"vim-commentary
+Plugin 'joom/vim-commentary'
+
+"All of your Plugins must be added before the following line
+call vundle#end()            " required
+filetype plugin indent on    " required
+" To ignore plugin indent changes, instead use:
+"filetype plugin on
+"
+" Brief help
+" :PluginList       - lists configured plugins
+" :PluginInstall    - installs plugins; append `!` to update or just
+":PluginUpdate
+" :PluginSearch foo - searches for foo; append `!` to refresh local cache
+" :PluginClean      - confirms removal of unused plugins; append `!` to auto-approve removal
+"
+" see :h vundle for more details or wiki for FAQ
+" Put your non-Plugin stuff after this line
+
+" Vimscript file settings ---------------------- {{{
+augroup filetype_vim
+	autocmd!
+	autocmd FileType vim setlocal foldmethod=marker
+augroup END
+" }}}
+
+colorscheme elflord
+
+set number
+set tabstop=4
+set shiftwidth=2
+set autoindent
+inoremap jj <esc>
+inoremap <esc> <nop>
+
+let mapleader = ","
+
+"ycm settings
+let g:ycm_server_python_interpreter = '/usr/bin/python3'
+
+let g:ycm_autoclose_preview_window_after_completion=1
+map <leader>g  :YcmCompleter GoToDefinitionElseDeclaration<CR>
+
+"airline settings
+let g:airline#extensions#bufferline#enabled = 1
+let g:airline_theme='deus'
+let g:airline#extensions#bufferline#enabled = 1
+
+"indent-guides settings
+let g:indent_guides_enable_on_vim_startup = 1
+set ts=4 sw=4 et
+let g:indent_guides_start_level = 2
+let g:indent_guides_guide_size = 1
+
+let g:indent_guides_auto_colors = 0
+autocmd VimEnter,Colorscheme * :hi IndentGuidesOdd  ctermbg=lightgrey
+autocmd VimEnter,Colorscheme * :hi IndentGuidesEven ctermbg=darkgrey
+
+nnoremap <leader>ev :vsplit $MYVIMRC<cr>
+nnoremap <leader>sv :source $MYVIMRC<cr>
+
+highlight Cursor guifg=white guibg=black
+highlight iCursor guifg=white guibg=red
+
+silent! map <F2> :NERDTreeToggle<CR>
+
+"move between buffers
+nnoremap <leader>kk :bn<cr>
+nnoremap <leader>jj :bp<cr>
+
+"window fuck-jheee
+nnoremap <leader>r :vsplit<cr>
+nnoremap <leader>d :split<cr>
+
+nnoremap <leader>k :wincmd k<cr>
+nnoremap <leader>j :wincmd j<cr>
+nnoremap <leader>h :wincmd h<cr>
+nnoremap <leader>l :wincmd l<cr>
+
+set conceallevel=1 "vim-javascript setting
+let g:jsx_ext_required = 0 " Allow JSX in normal JS files
+
+augroup filetype_html
+	autocmd!
+	autocmd FileType html nnoremap <buffer><leader>f Vatzf
+augroup END
+
+
+"Experiments"""""""""""""""""""""""""""""""""""""""""""""""
+nnoremap <leader>q :call QuickfixToggle()<cr>
+
+function! QuickfixToggle()
+    copen
+endfunction
+
+
+"""""""""""""""""""""""""""
+nnoremap <leader>q :call QuickfixToggle()<cr>
+
+let g:quickfix_is_open = 0
+
+function! QuickfixToggle()
+    if g:quickfix_is_open
+        cclose
+        let g:quickfix_is_open = 0
+        execute g:quickfix_return_to_window . "wincmd w"
+    else
+        let g:quickfix_return_to_window = winnr()
+        copen
+        let g:quickfix_is_open = 1
+    endif
+endfunction
+"End of experiments""""""""""""""""""""""""""""""""""""""""
