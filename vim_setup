@@ -136,6 +136,10 @@ nnoremap <leader>j :wincmd j<cr>
 nnoremap <leader>h :wincmd h<cr>
 nnoremap <leader>l :wincmd l<cr>
 
+"tab move
+"nnoremap <S>j :tabnext
+"nnoremap <S>k :tabprevious
+
 set conceallevel=1 "vim-javascript setting
 let g:jsx_ext_required = 0 " Allow JSX in normal JS files
 
