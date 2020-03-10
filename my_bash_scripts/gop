@@ -1,0 +1,5 @@
+function gop {
+    path='~/own_staff/projects'
+    eval cd ${path}
+    cd $1
+}
