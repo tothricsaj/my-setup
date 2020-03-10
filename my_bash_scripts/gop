@@ -1,5 +1,12 @@
-function gop {
-    path='~/own_staff/projects'
-    eval cd ${path}
-    cd $1
-}
+path='~/own_staff/projects'
+
+if [ -z "$1" ]; then
+	echo "Fuck yhea"
+	eval cd ${path}
+	cd
+else
+	eval cd ${path}
+	cd $1
+fi
+
+
