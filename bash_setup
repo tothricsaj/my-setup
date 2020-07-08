@@ -104,7 +104,9 @@ alias l='ls -CF'
 
 # own aliases
 alias csao='sudo shutdown -P now'
-alias gp='cd ~projects/'
+
+alias gp='pushd ~/projects && clear && ll'
+alias projects='pushd ~/own_staff/projects && clear && ll'
 
 # Add an "alert" alias for long running commands.  Use like so:
 #   sleep 10; alert
